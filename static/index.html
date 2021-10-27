@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <title>File uploader</title>
+</head>
+<body>
+    <div class="button-container">
+        <button id="auth">Авторизация</button>
+        <button id="profile">Изменить профиль</button>
+    </div>
+
+    <form id="form" method="POST" enctype=multipart/form-data >
+        <div>
+            <label class="file-uploader">
+                Загрузка файла
+                <input type="file" name="avatar" />
+            </label>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
+    <div id="message"></div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./script.js" type="module"></script>
+</body>
+</html>

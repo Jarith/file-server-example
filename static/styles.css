@@ -1,0 +1,38 @@
+.button-container {
+    display: flex;
+    width: 300px;
+}
+
+button {
+    height: 50px;
+    width: 100%;
+}
+
+button + button {
+    margin-left: 10px;
+}
+
+#form {
+    margin-top: 10px;
+    width: 300px;
+}
+
+.file-uploader {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: salmon;
+    color: white;
+    height: 50px;
+    width: 300px;
+    margin-top: 10px;
+    font-size: 20px;
+    visibility: hidden;
+}
