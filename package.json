@@ -14,18 +14,19 @@
     "url": "https://github.com/Jarith/file-server-example/issues"
   },
   "dependencies": {
-    "axios": "0.23.0",
-    "connect-busboy": "0.0.2",
-    "cookie-parser": "1.4.5",
-    "express": "4.17.1",
+    "axios": "0.24.0",
+    "busboy": "1.0.0",
+    "connect-busboy": "1.0.0",
+    "cookie-parser": "1.4.6",
+    "express": "4.17.2",
     "form-data": "4.0.0"
   },
   "devDependencies": {
-    "eslint": "7.32.0",
-    "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.24.2",
-    "eslint-plugin-promise": "5.1.0",
-    "nodemon": "2.0.14"
+    "eslint": "8.5.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-promise": "6.0.0",
+    "nodemon": "2.0.15"
   },
   "homepage": "https://github.com/Jarith/file-server-example#readme"
 }

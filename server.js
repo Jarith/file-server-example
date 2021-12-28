@@ -7,14 +7,18 @@ const FormData = require('form-data');
 const app = express();
 const api = express.Router();
 
-const PORT = 5000;
+const PORT = 5001;
 
 api.use(express.json());
 api.use(busboy({ immediate: true }));
 
-const SIGN_IN_URL = 'https://ya-praktikum.tech/api/v2/auth/signin';
-const AVATAR_URL = 'https://ya-praktikum.tech/api/v2/user/profile/avatar';
-const PROFILE_URL = 'https://ya-praktikum.tech/api/v2/user/profile';
+const HOST = 'https://ya-praktikum.tech/api/v2';
+
+const SIGN_IN_URL = `${HOST}/auth/signin`;
+const AVATAR_URL = `${HOST}/user/profile/avatar`;
+const PROFILE_URL = `${HOST}/user/profile`;
+
+const RESOURCES_URL = `${HOST}/resources`;
 
 let cookies = '';
 
@@ -27,8 +31,8 @@ const parseCookies = cookie => cookie
 
 api.post('/signin', (req, res) => {
     const user = {
-        login: 'login',
-        password: 'pass',
+        login: 'str',
+        password: 'test',
     };
 
     axios.post(SIGN_IN_URL, user)
@@ -40,12 +44,27 @@ api.post('/signin', (req, res) => {
         .catch(({ response }) => console.error(response.data));
 });
 
+api.get('/avatar/*', (req, res) => {
+    const URL = `${RESOURCES_URL}/${req.params[0]}`;
+
+    const config = {
+        headers: {
+            Cookie: cookies,
+        },
+        withCredentials: true,
+        responseType: 'stream',
+    };
+
+    return axios.get(URL, config)
+        .then(result => result.data.pipe(res));
+});
+
 api.post('/avatar', (req, res) => {
     if (!req.busboy) {
         return res.sendStatus(500);
     }
 
-    req.busboy.on('file', (fieldName, file, filename) => {
+    req.busboy.on('file', (fieldName, file, { filename }) => {
         const formData = new FormData();
 
         formData.append('avatar', file, { filename });
@@ -61,7 +80,7 @@ api.post('/avatar', (req, res) => {
         axios
             .put(AVATAR_URL, formData, config)
             .then(({ data }) => res.send(data))
-            .catch(({ response }) => console.error(response));
+            .catch(({ response }) => console.error('ERROR:', response));
     });
 });
 
@@ -86,7 +105,7 @@ api.post('/profile', (req, res) => {
     axios
         .put(PROFILE_URL, profile, config)
         .then(({ data }) => res.send(data))
-        .catch(({ response }) => console.error(response));
+        .catch(({ response }) => console.error('ERROR:', response));
 });
 
 app.use(express.static(path.join(__dirname, 'static')));
